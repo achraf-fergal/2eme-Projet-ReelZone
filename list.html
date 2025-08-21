@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagination Genre</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="home.css" />
+    <link rel="icon" type="image/png" href="logo.svg" />
+    <script src="film.js" defer></script>
+
+</head>
+<body>
+  <style>
+
+page-move{
+  padding: 1vw;;
+}
+.li, .li::before, .li::after {
+box-sizing: content-box;
+}
+
+*, ::after, ::before {
+     box-sizing:content-box; 
+}
+  </style>
+<nav class="my-nav">
+    <!-- المحتوى ديالك هنا -->
+</nav>
+
+  <div class="container mt-6">
+    <h2 id="move-h"></h2>
+    <div id="film-container"></div>
+
+    <ul class="pagination justify-content-center mt-8">
+      <li class="page-item mt-8"><a class="page-link" href="#" id="prev">Previous</a></li>
+      <!-- أزرار الصفحات ستُضاف هنا -->
+      <li class="page-item"><a class="page-link" href="#" id="next">Next</a></li>
+    </ul>
+  </div>
+
+
+<footer></footer>
+
+
+
+
+  <script>
+
+const params = new URLSearchParams(window.location.search);
+
+
+if (params.has("genre")) {
+  const genre = params.get("genre"); // مثلا genre=Action
+
+  fetch("film.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const actionFilms = data.filter((film) =>
+        film.genre.includes(genre)
+      );
+
+      const filmsPerPage = 27;
+      let currentPage = 1;
+      const totalPages = Math.ceil(actionFilms.length / filmsPerPage);
+
+      const pagination = document.querySelector(".pagination");
+      const filmContainer = document.getElementById("film-container");
+
+      // ⬅️ عرض الأفلام
+      function showPage(page) {
+        filmContainer.innerHTML = "";
+
+        const start = (page - 1) * filmsPerPage;
+        const end = start + filmsPerPage;
+        const pageFilms = actionFilms.slice(start, end);
+
+        pageFilms.forEach((film) => {
+          const div = document.createElement("div");
+          let link = `move.html?id=${film.id}`;
+
+          // تغيير الرابط إذا كان مسلسل
+          if (film.type && film.type.toLowerCase() === "series" && film.linck) {
+            if (
+              !film.linck.startsWith("http://") &&
+              !film.linck.startsWith("https://")
+            ) {
+              link = "https://" + film.linck;
+            } else {
+              link = film.linck;
+            }
+          }
+
+          div.className = "mn";
+          div.innerHTML = `
+            <a href="${link}" class='page-move'>
+              <div class="move">
+                <img src="${film.img}" alt="" class="film-img"/>
+                <h4>${film.title}</h4>
+              </div>
+            </a>`;
+
+          filmContainer.appendChild(div);
+        });
+      }
+
+      // 🔢 إنشاء أزرار الصفحات
+      for (let m = 1; m <= totalPages; m++) {
+        const li = document.createElement("li");
+        li.className = "page-item";
+        li.innerHTML = `<a class="page-link page-number" href="#">${m}</a>`;
+        pagination.insertBefore(li, document.getElementById("next").parentElement);
+      }
+
+      // 🎯 عرض الصفحة الأولى مبدئياً
+      showPage(currentPage);
+
+      // 📌 التعامل مع أزرار الصفحات
+      document.querySelectorAll(".page-number").forEach((btn, index) => {
+        if (index === 0) btn.classList.add("active"); // الصفحة الأولى مفعلة
+
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelectorAll(".page-number").forEach((b) =>
+            b.classList.remove("active")
+          );
+          e.target.classList.add("active");
+          currentPage = parseInt(e.target.textContent);
+          showPage(currentPage);
+        });
+      });
+
+      // ⬅️ زر السابق
+      document.getElementById("prev").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          updateActivePage();
+          showPage(currentPage);
+        }
+      });
+
+      // ➡️ زر التالي
+      document.getElementById("next").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateActivePage();
+          showPage(currentPage);
+        }
+      });
+
+      // 🔄 تحديث الزر النشيط
+      function updateActivePage() {
+        document.querySelectorAll(".page-number").forEach((b) =>
+          b.classList.remove("active")
+        );
+        document
+          .querySelectorAll(".page-number")
+          [currentPage - 1].classList.add("active");
+      }
+    })
+    .catch((error) => {
+      console.error("حدث خطأ:", error);
+    });
+}
+
+
+
+
+
+
+
+if(params.has("title")) {
+  document.addEventListener("DOMContentLoaded", function () {
+  const filmContainer = document.getElementById("film-container");
+  const pagination = document.querySelector(".pagination");
+
+  const filmsPerPage = 27;
+  let currentPage = 1;
+  let actionFilms = [];
+
+  fetch("film.json")
+    .then(res => res.json())
+    .then(data => {
+      // قراءة title من URL
+      const params = new URLSearchParams(window.location.search);
+      const title = params.get("title") || "";
+
+      // فلترة الأفلام إذا كان title موجود
+      actionFilms = title
+        ? data.filter(film => film.title.toLowerCase().includes(title.toLowerCase()))
+        : data;
+
+      const totalPages = Math.ceil(actionFilms.length / filmsPerPage);
+
+      // دالة عرض الصفحة
+      function showPage(page) {
+        filmContainer.innerHTML = "";
+        const start = (page - 1) * filmsPerPage;
+        const end = start + filmsPerPage;
+        const pageFilms = actionFilms.slice(start, end);
+
+        pageFilms.forEach(film => {
+                    var link = `move.html?id=${film.id}`;
+
+          // تغيير الرابط إذا كان مسلسل
+if (film.type && film.type.toLowerCase() === "series" && film.linck) {
+  if (!film.linck.startsWith("http://") && !film.linck.startsWith("https://")) {
+    link = "https://" + film.linck;
+  } else {
+    link = film.linck;
+  }
+}
+
+          const div = document.createElement("div");
+          div.className="mn";
+          div.innerHTML = `
+            <a href="${link}" class='page-move'>
+              <div class="move">
+                <img src="${film.img}" alt="" class="film-img"/>
+                <h4>${film.title}</h4>
+              </div>
+            </a>`;
+          filmContainer.appendChild(div);
+        });
+      }
+
+      // 🔢 إنشاء أزرار الصفحات
+      for (let m = 1; m <= totalPages; m++) {
+        const li = document.createElement("li");
+        li.className = "page-item";
+        li.innerHTML = `<a class="page-link page-number" href="#">${m}</a>`;
+        pagination.insertBefore(li, document.getElementById("next").parentElement);
+      }
+
+      // 🎯 عرض الصفحة الأولى مبدئياً
+      showPage(currentPage);
+
+      // 📌 التعامل مع أزرار الصفحات
+      document.querySelectorAll(".page-number").forEach((btn, index) => {
+        if (index === 0) btn.classList.add("active"); // الصفحة الأولى مفعلة
+
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelectorAll(".page-number").forEach((b) =>
+            b.classList.remove("active")
+          );
+          e.target.classList.add("active");
+          currentPage = parseInt(e.target.textContent);
+          showPage(currentPage);
+        });
+      });
+
+      // ⬅️ زر السابق
+      document.getElementById("prev").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          updateActivePage();
+          showPage(currentPage);
+        }
+      });
+
+      // ➡️ زر التالي
+      document.getElementById("next").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateActivePage();
+          showPage(currentPage);
+        }
+      });
+
+      // 🔄 تحديث الزر النشيط
+      function updateActivePage() {
+        document.querySelectorAll(".page-number").forEach((b) =>
+          b.classList.remove("active")
+        );
+        document
+          .querySelectorAll(".page-number")
+          [currentPage - 1].classList.add("active");
+      }
+    })
+    .catch((error) => {
+      console.error("حدث خطأ:", error);
+    });
+})}
+
+if (params.has("type")) {
+  const type = params.get("type");
+
+  fetch('film.json')
+    .then(response => response.json())
+    .then(data => {
+      // فلترة حسب النوع لعرض العناصر المطلوبة
+      const filteredFilms = data.filter(film => film.type && film.type.includes(type));
+
+      const filmsPerPage = 27;
+      let currentPage = 1;
+      const totalPages = Math.ceil(filteredFilms.length / filmsPerPage);
+
+      const pagination = document.querySelector(".pagination");
+      const filmContainer = document.getElementById("film-container");
+
+      function showPage(page) {
+        filmContainer.innerHTML = "";
+
+        const start = (page - 1) * filmsPerPage;
+        const end = start + filmsPerPage;
+        const pageFilms = filteredFilms.slice(start, end);
+
+        pageFilms.forEach(film => {
+          var link = `move.html?id=${film.id}`;
+
+          // تغيير الرابط إذا كان مسلسل
+if (film.type && film.type.toLowerCase() === "series" && film.linck) {
+  if (!film.linck.startsWith("http://") && !film.linck.startsWith("https://")) {
+    link = "https://" + film.linck;
+  } else {
+    link = film.linck;
+  }
+}
+
+          const div = document.createElement("div");
+          div.className="mn";
+          div.innerHTML = `
+            <a href="${link}" class="page-move" target="_blank">
+              <div class="move">
+                <img src="${film.img}" alt="" class="film-img"/>
+                <h4>${film.title}</h4>
+              </div>
+            </a>
+          `;
+          filmContainer.appendChild(div);
+        });
+      }
+      // 🔢 إنشاء أزرار الصفحات
+      for (let m = 1; m <= totalPages; m++) {
+        const li = document.createElement("li");
+        li.className = "page-item";
+        li.innerHTML = `<a class="page-link page-number" href="#">${m}</a>`;
+        pagination.insertBefore(li, document.getElementById("next").parentElement);
+      }
+
+      // 🎯 عرض الصفحة الأولى مبدئياً
+      showPage(currentPage);
+
+      // 📌 التعامل مع أزرار الصفحات
+      document.querySelectorAll(".page-number").forEach((btn, index) => {
+        if (index === 0) btn.classList.add("active"); // الصفحة الأولى مفعلة
+
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelectorAll(".page-number").forEach((b) =>
+            b.classList.remove("active")
+          );
+          e.target.classList.add("active");
+          currentPage = parseInt(e.target.textContent);
+          showPage(currentPage);
+        });
+      });
+
+      // ⬅️ زر السابق
+      document.getElementById("prev").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          updateActivePage();
+          showPage(currentPage);
+        }
+      });
+
+      // ➡️ زر التالي
+      document.getElementById("next").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateActivePage();
+          showPage(currentPage);
+        }
+      });
+
+      // 🔄 تحديث الزر النشيط
+      function updateActivePage() {
+        document.querySelectorAll(".page-number").forEach((b) =>
+          b.classList.remove("active")
+        );
+        document
+          .querySelectorAll(".page-number")
+          [currentPage - 1].classList.add("active");
+      }
+    })
+    .catch((error) => {
+      console.error("حدث خطأ:", error);
+    });
+}
+
+
+  </script>
+
+</body>
+</html>
+

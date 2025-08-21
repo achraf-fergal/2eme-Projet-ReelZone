@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="home.css" />
+    <script src="film.js" defer></script>
+    <title>ReelZone</title>
+    <link rel="icon" type="image/png" href="logo.svg" />
+</head>
+<body style="overflow-x: hidden; width: 100vw;" id="bbdy">
+  <nav id="nav-2">
+         </nav>
+  <style>
+
+    h4{
+      display: inline;
+    }
+    button{
+      background-color: rgba(255, 99, 71, 0);border: none;cursor: pointer;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .list55{
+      columns: 2;column-gap: 0%;
+    }
+    body{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    p{color: white;}
+    .popup-content {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+    }
+
+
+    #background-img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      height: 66vh;
+      left: 0;
+      opacity: 0.99;
+      background-repeat: no-repeat;
+      background-position: center 25%;
+      background-size: cover;
+      overflow: hidden;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    button.btn svg {
+      transition: 1s
+    }
+
+    button.btn svg:hover {
+      transform: translateY(-2px);
+      scale: 1.1;
+      filter: drop-shadow(0 6px 10px rgba(255, 0, 0, 0.566));
+    }
+
+    button.btn svg:hover path,
+    button.btn svg:hover circle {
+      stroke: hwb(from rgb(255, 255, 255) h w b);
+      /* اللون الجديد عند hover */
+    }
+
+    #trailer-frame {
+      width: 80vw;
+      height: 63vh;
+      margin-top: 1.5vh;
+      align-self: center;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    ul{
+      list-style: none;
+    }
+    .list-geniral{
+      display: flex;
+      margin-left: 5vw;
+      align-items: center;
+      justify-content: start;
+      flex-direction: row;
+      gap: 2vw;
+    }
+    #you-want{
+      font-size: 1.5rem;    display: flex
+;
+    gap: 1vw;
+    }
+    .move{
+      width: 22vw;
+    }
+  </style>
+
+  <!-- زر أو صورة الفيلم -->
+
+
+  <!-- النافذة المنبثقة -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closeTrailer()">&times;</span>
+<iframe
+  id="popup-frame"
+  width="100%"
+  height="400"
+  frameborder="0"
+  sandbox="allow-scripts allow-same-origin"
+  allowfullscreen>
+</iframe>
+    </div>
+  </div>
+  <script>
+
+  </script>
+  <h2 id="film-title" style="color: gold;"></h2>
+  <div class="trailer-wrapper" style="
+        
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;border: 1px solid red;
+      ">
+    <div id="background-img" style="background-size: 100% 100%;background-position: center;">
+      <button type="button" class="btn psition-btn"
+        style="width: 10vw; padding: 10px; border: none; border-radius: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+          style="width: 100%; filter: drop-shadow(0 2px 4px rgb(255, 124, 124));transition: 1s;">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M16.2111 11.1056L9.73666 7.86833C8.93878 7.46939 8 8.04958 8 8.94164V15.0584C8 15.9504 8.93878 16.5306 9.73666 16.1317L16.2111 12.8944C16.9482 12.5259 16.9482 11.4741 16.2111 11.1056Z"
+              stroke="#ff0000" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="12" cy="12" r="9" stroke="#ff0000"></circle>
+          </g>
+        </svg>
+      </button>
+
+    </div>
+
+    <iframe id="trailer-frame" allowfullscreen> </iframe>
+  </div>
+<hr style="border-color:  red; height: 2vh;background-color: #ff0000;opacity: 0%;">
+
+<div style="margin-top: 5vw;;margin-bottom: 5vw;;" class="list-geniral">
+  <img src="" alt="" id="img-d" >
+  <ul width="30vw" id="ul-tmove">
+  
+    <li>  <button  class="btn trailer-btn"
+    style="color:rgb(143, 143, 143)">
+
+    <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <style type="text/css">
+          .st0 {
+            fill: #ff0000;
+          }
+        </style>
+        <g>
+          <path class="st0"
+            d="M209.75,318.813c0.75,0.438,1.656,0.406,2.406-0.031l101.75-60.734c0.719-0.422,1.156-1.203,1.156-2.047 c0-0.828-0.438-1.625-1.156-2.031l-101.75-60.75c-0.75-0.422-1.656-0.438-2.406-0.031c-0.734,0.438-1.188,1.234-1.188,2.094V256 v60.719C208.563,317.594,209.016,318.391,209.75,318.813z">
+          </path>
+          <path class="st0"
+            d="M432,0v36H80V0H0v512h80v-36h352v36h80V0H432z M56,476H24v-40h32V476z M56,396H24v-40h32V396z M56,316H24v-40 h32V316z M56,236H24v-40h32V236z M56,156H24v-40h32V156z M56,76H24V36h32V76z M432,428H80V84h352V428z M488,476h-32v-40h32V476z M488,396h-32v-40h32V396z M488,316h-32v-40h32V316z M488,236h-32v-40h32V236z M488,156h-32v-40h32V156z M488,76h-32V36h32V76z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    trailer
+  </button></li>
+        <ul class="list55">
+ 
+        <li class="list-title" ></li>
+      </ul>
+    <li><p id="p5" style="width: 94%;"></p>
+    </li>
+    <li>
+
+      <ul class="list55">
+        <li ><h4>Genres:</h4></li>
+        <li class="list-genre"></li>
+      </ul>
+      <ul class="list55">
+        <li ><h4>Directors:</h4></li>
+        <li class="list-Directors"></li>
+      </ul>
+      <ul class="list55">
+        <li ><h4>Released:</h4></li>
+        <li class="list-date"></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+
+  <script>
+    const psitionbtn = document.querySelector('.psition-btn');
+    psitionbtn.addEventListener('click', () => {
+      document.getElementById('background-img').style.zIndex = '-1';
+    });
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+        function getEmbedUrl(url) {
+      // استخراج معرف الفيديو من الرابط
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        match = url.match(regExp);
+      if (match && match[2].length === 11) {
+        return `https://www.youtube.com/embed/${match[2]}`;
+      } else {
+        return url; // لو الرابط ليس يوتيوب أو غير صحيح، يعيد نفس الرابط
+      }
+    }
+
+    fetch("film.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const film = data.find((f) => String(f.id) === id);
+        if (film) {
+          
+          document.querySelector(".psition-btn").addEventListener("click", () => {
+            document.getElementById("trailer-frame").src = film.linck;
+            document.getElementById('background-img').style.zIndex = '-1';
+          });
+          document.getElementById(
+            "background-img"
+          ).style.backgroundImage = `url(${film.background})`;
+          document.getElementById("p5").textContent = film.discription;
+          document.querySelector(".list-genre").innerHTML = `<h4>${film.genre}</h4>`;
+          document.querySelector(".list-Directors").innerHTML = `<h4 >${film.Director}</h4>` ;
+          document.getElementById("film-title").innerHTML = `${ film.title}`;
+          document.querySelector(".list-title").innerHTML = `<h4 style="color: gold;">${ film.title}</h4>`;
+        
+const url = getEmbedUrl(film.trailer);
+
+function openTrailer() {
+  document.getElementById("popup-frame").src = url;
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closeTrailer() {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById("popup-frame").src = "";
+}
+
+document.querySelector(".trailer-btn").onclick = openTrailer;
+document.querySelector(".close").onclick = closeTrailer;
+
+          document.querySelector(".trailer-btn").onclick = openTrailer;
+
+          document.querySelector(".list-date").innerHTML = `<h4>${film.Year}</h4>` ;
+          document.getElementById("img-d").src = film.img+`?quality=100&width=1200`;
+
+
+
+        } else {
+          document.querySelector(".trailer-wrapper").innerHTML =
+            "<p>الفيلم غير موجود.</p>";
+        }
+      });
+
+
+
+fetch('film.json')
+  .then(response => response.json())
+  .then(data => {
+    // 🔀 خلط الأفلام عشوائياً
+    const shuffledFilms = data.sort(() => Math.random() - 0.5);
+
+    const filmsPerPage = 7;
+    let currentPage = 1;
+    const totalPages = Math.ceil(shuffledFilms.length / filmsPerPage);
+
+    const filmContainer = document.getElementById("film-cont");
+
+    function showPage(page) {
+      filmContainer.innerHTML = "";
+
+      const start = (page - 1) * filmsPerPage;
+      const end = start + filmsPerPage;
+      const pageFilms = shuffledFilms.slice(start, end);
+
+      pageFilms.forEach(film => {
+        const div = document.createElement("div");
+        div.classList.add("col-md-3", "mb-4"); // باش يكون شكل bootstrap منظم
+        div.innerHTML = `        
+          <a href="move.html?id=${film.id}" class='page-move'>
+            <div class="move">
+              <img src="${film.img}" alt="${film.title}" class="film-img"/>
+              <h4>${film.title}</h4>
+            </div>
+          </a>`;
+        filmContainer.appendChild(div);
+      });
+    }
+
+    // عرض الصفحة الأولى
+    showPage(currentPage);
+  });
+
+
+  </script>
+  <div class="you-want">
+  <h4 style="margin-left: 5vw;text-transform: uppercase;color: #a30e0e;" id="you-want" > You may also like
+<svg viewBox="13 0 16 30" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)matrix(-1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16 6V5L11 0L6 5V6H10V12H1L1 14H12V6H16Z" fill="#ff0000"></path> </g></svg> 
+   
+</h4></div>
+
+<div id="film-cont" class="scroll-aa " style="display: flex;flex-direction: row;overflow-x: scroll;width: 98vw;margin-top: 10vh;"></div>
+
+
+  </div>
+  <footer></footer>
+</body>
+
+</html>
