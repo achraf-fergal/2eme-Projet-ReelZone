@@ -105,9 +105,9 @@ details{
 }
 #div-scl4{background-image: url(https://static.lookmovie.fi/7c/i/8/2b/6880527066938@1280.webp);}
 #div-scl5{
-    background-image: url(marvel-thunderbolts-movie-2025-xu-3000x2000.jpg);
+    background-image: url(https://image.tmdb.org/t/p/original/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg);
 }#div-scl6{
-    background-image: url(the-accountant-2-3840x2160-21537.jpg);
+    background-image: url(https://image.tmdb.org/t/p/original/yBDvgpyynDsbMyK21FoQu1c2wYR.jpg);
     
 }
 
@@ -717,3 +717,4 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
     color: goldenrod;
 
 }
+
