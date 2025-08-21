@@ -101,7 +101,7 @@ details{
     background-image: url(wp14240952-deadpool-wolverine-4k-wallpapers.jpg);
 }
 #div-scl2{
-    background-image: url(spider-man-across-7680x6133-11542.jpg);
+    background-image: url(https://4kwallpapers.com/images/walls/thumbs_3t/11542.jpg);
 }
 #div-scl4{background-image: url(https://static.lookmovie.fi/7c/i/8/2b/6880527066938@1280.webp);}
 #div-scl5{
@@ -715,4 +715,5 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
 }
 .mm h4 {
     color: goldenrod;
+
 }
