@@ -685,7 +685,7 @@ element.style {
     font-size: 0.75rem;
 }
 }
-@media (max-width: 350px){
+@media (max-width: 400px){
     #div-scl p, #div-scl2 p, #div-scl3 p, #div-scl4 p, #div-scl5 p, #div-scl6 p {
         display:none
     }
@@ -734,5 +734,6 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
     color: goldenrod;
 
 }
+
 
 
