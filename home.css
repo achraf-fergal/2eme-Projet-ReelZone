@@ -594,8 +594,8 @@ footer img{
         font-size: 2rem;
     }
 }
-.li2 li a { color:black}
-@media (max-width: 1450px) {
+.li2 a{ color:black}
+@media (max-width: 950px) {
 h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-scl6 h2){
     font-size: 2rem;
 }
@@ -741,12 +741,12 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
     color: goldenrod;
 
 }
-@media (min-width: 800px) {
+@media (min-width: 1500px) {
     .li2{
-        width: 15vw;font-size: 2rem;
+        width: 10vw;font-size: 2rem;
     }
     .genre {
-            width: 40vw;margin-left: 17vw;
+            width: 30vw;margin-left: 12vw;
     }
     #div-scl2 h2, #div-scl h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-scl6 h2 {
         font-size: 2rem;
