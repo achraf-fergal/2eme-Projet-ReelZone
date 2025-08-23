@@ -741,19 +741,13 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
     color: goldenrod;
 
 }
-@media (min-width: 2000px) {
-    .li2{
-        width: 10vw;font-size: 2rem;
-    }
-    .genre {
-            width: 30vw;margin-left: 12vw;
-    }
+@media (min-width: 1850px) {
+
+
     #div-scl2 h2, #div-scl h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-scl6 h2 {
         font-size: 2rem;
     }
-.genre >li a{
-    font-size: 1.4rem
-}
+
     #div-scl p, #div-scl2 p, #div-scl3 p, #div-scl4 p, #div-scl5 p, #div-scl6 p {
         font-size: 1.5rem;
         line-height: 5vh;
@@ -765,6 +759,7 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
 .psition-btn svg{
     width: 10vw;height: auto;
 }
+
 
 
 
