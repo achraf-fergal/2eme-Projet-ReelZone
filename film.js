@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </li>
                     <li >
                         <ul class="li2">
-                            <li><a href="home.html">HOME</a></li>
+                            <li><a href="index.html">HOME</a></li>
                             <li>
                                 <a id="home-genre">Genre</a>
                                 <ul class="genre">
@@ -365,3 +365,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
