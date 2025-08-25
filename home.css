@@ -654,6 +654,12 @@ nav svg{
         height: 20vw;
         width: 30vw;
     }
+    
+.result-item-content img {
+    width: 10vw;
+    height: 10vw;
+}
+    .result-item-content {    font-size: small;}
     .list-movie{
          gap: 6vw;
     }
@@ -759,6 +765,7 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
 .psition-btn svg{
     width: 10vw;height: auto;
 }
+
 
 
 
