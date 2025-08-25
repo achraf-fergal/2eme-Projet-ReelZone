@@ -654,6 +654,9 @@ nav svg{
         height: 20vw;
         width: 30vw;
     }
+    .result-serch{
+        width: 63vw;
+    }
     
 .result-item-content img {
     width: 10vw;
@@ -765,6 +768,7 @@ h2:is(#div-scl h2, #div-scl2 h2, #div-scl3 h2, #div-scl4 h2, #div-scl5 h2, #div-
 .psition-btn svg{
     width: 10vw;height: auto;
 }
+
 
 
 
